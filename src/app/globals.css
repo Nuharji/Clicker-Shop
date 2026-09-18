@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+/*
+ * Manueller Light/Dark-Toggle statt "nur System-Einstellung": ein
+ * Toggle (siehe ThemeToggle-Komponente) setzt die Klasse "dark" auf
+ * <html>. Diese Zeile sagt Tailwind, dass "dark:"-Utilities auf diese
+ * Klasse reagieren sollen statt (nur) auf prefers-color-scheme.
+ */
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  /*
+   * "color-scheme" sorgt dafür, dass auch native Elemente wie
+   * <select>-Dropdowns, der Datepicker oder der Farbwähler zum
+   * jeweils aktiven Theme passen (nicht nur unsere eigenen Utility-
+   * Klassen).
+   */
+  color-scheme: light;
+}
+
+.dark {
+  --background: #0c0a09;
+  --foreground: #f5f5f4;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
